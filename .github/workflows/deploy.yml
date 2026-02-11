@@ -1,6 +1,5 @@
-name: Deploy React App to GitHub Pages
+name: Deploy Figma Make Site
 
-# Trigger workflow on push to main branch
 on:
   push:
     branches:
@@ -12,30 +11,18 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
         with:
-          node-version: 18
+          path: .   # root folder (where index.html lives)
 
-      # 3️⃣ Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # 4️⃣ Build the project
-      - name: Build project
-        run: npm run build
-
-      # 5️⃣ Deploy to GitHub Pages (user site)
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          path: dist  # folder created by `npm run build`
