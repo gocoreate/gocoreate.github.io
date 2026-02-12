@@ -1,41 +1,43 @@
 import { Link } from 'react-router';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import logoImage from 'figma:asset/9fe35c91ad6e1b0e72b516eb2092fba04e984f44.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="shadow-sm sticky top-0 z-50" style={{ backgroundColor: '#1C2541' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-2xl text-[#1C2541]" style={{ fontFamily: 'Comfortaa, cursive' }}>
-              CoReate
+            <span className="text-2xl" style={{ fontFamily: 'Comfortaa, cursive', color: '#F5F5F5' }}>
+              <img src={logoImage} alt="CoReate Logo" className="h-6" />
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-[#1C2541] transition-colors">
-              Home
-            </Link>
-            <Link to="/services" className="text-gray-700 hover:text-[#1C2541] transition-colors">
-              Services
-            </Link>
-            <Link to="/about" className="text-gray-700 hover:text-[#1C2541] transition-colors">
+            <a href="#about" className="hover:text-gray-300 transition-colors" style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}>
               About
-            </Link>
-            <Link to="/contact" className="text-gray-700 hover:text-[#1C2541] transition-colors">
-              Contact
-            </Link>
+            </a>
+            <a href="#services" className="hover:text-gray-300 transition-colors" style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}>
+              Our Services
+            </a>
+            <a href="#work-with-us" className="hover:text-gray-300 transition-colors" style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}>
+              Work with Us
+            </a>
+            <a href="#contact" className="hover:text-gray-300 transition-colors" style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}>
+              Contact Us
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-[#1C2541] hover:bg-gray-100"
+            className="md:hidden p-2 rounded-md hover:bg-[#2a3a5f]"
+            style={{ color: '#F5F5F5' }}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -44,34 +46,38 @@ export function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-2">
-            <Link
-              to="/"
-              className="block px-3 py-2 text-gray-700 hover:text-[#1C2541] hover:bg-gray-50 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/services"
-              className="block px-3 py-2 text-gray-700 hover:text-[#1C2541] hover:bg-gray-50 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Services
-            </Link>
-            <Link
-              to="/about"
-              className="block px-3 py-2 text-gray-700 hover:text-[#1C2541] hover:bg-gray-50 rounded-md"
+            <a
+              href="#about"
+              className="block px-3 py-2 hover:bg-[#2a3a5f] rounded-md"
+              style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}
               onClick={() => setIsMenuOpen(false)}
             >
               About
-            </Link>
-            <Link
-              to="/contact"
-              className="block px-3 py-2 text-gray-700 hover:text-[#1C2541] hover:bg-gray-50 rounded-md"
+            </a>
+            <a
+              href="#services"
+              className="block px-3 py-2 hover:bg-[#2a3a5f] rounded-md"
+              style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact
-            </Link>
+              Our Services
+            </a>
+            <a
+              href="#work-with-us"
+              className="block px-3 py-2 hover:bg-[#2a3a5f] rounded-md"
+              style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Work with Us
+            </a>
+            <a
+              href="#contact"
+              className="block px-3 py-2 hover:bg-[#2a3a5f] rounded-md"
+              style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact Us
+            </a>
           </div>
         )}
       </div>

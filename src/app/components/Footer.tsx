@@ -1,45 +1,44 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram } from 'lucide-react';
 
 export function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          <div className="text-center">
             <h3 className="text-white text-lg mb-4" style={{ fontFamily: 'Comfortaa, cursive' }}>
               CoReate
             </h3>
-            <p className="text-sm">
-              Empowering businesses with strategic insights and innovative solutions since 2015.
-            </p>
+            <p className="text-sm">Connecting you to endless possibilities</p>
           </div>
           
-          <div>
-            <h3 className="text-white text-lg mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/" className="hover:text-white transition-colors">Home</a></li>
-              <li><a href="/services" className="hover:text-white transition-colors">Services</a></li>
-              <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
-              <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
-            </ul>
-          </div>
-          
-          <div>
+          <div className="text-center">
             <h3 className="text-white text-lg mb-4">Contact Info</h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 justify-center">
                 <Mail size={16} />
-                <span>info@coreate.com</span>
+                <a href="mailto:info@gocoreate.com" className="hover:text-white transition-colors">
+                  <span>info@gocoreate.com</span>
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone size={16} />
-                <span>(555) 123-4567</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={16} />
-                <span>123 Business St, Suite 100</span>
-              </li>
+              
+              
             </ul>
+          </div>
+
+          <div className="text-center">
+            <h3 className="text-white text-lg mb-4">Follow Us</h3>
+            <div className="flex gap-4 justify-center">
+              <a href="mailto:info@coreate.com" className="hover:text-white transition-colors">
+                
+              </a>
+              <a href="https://www.linkedin.com/company/coreate" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <Linkedin size={24} />
+              </a>
+              <a href="https://www.instagram.com/gocoreate/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <Instagram size={24} />
+              </a>
+            </div>
           </div>
         </div>
         
