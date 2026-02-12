@@ -13,7 +13,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-2xl" style={{ fontFamily: 'Comfortaa, cursive', color: '#F5F5F5' }}>
-              <img src="/logo.png" alt="Logo" className="h-6" />
+              <img src="/src/assets/logo.png" alt="Logo" className="h-6" />
             </span>
           </Link>
 
