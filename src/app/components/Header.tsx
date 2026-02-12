@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import logo from "../../assets/logo.png";
 
 
 export function Header() {
@@ -13,7 +14,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-2xl" style={{ fontFamily: 'Comfortaa, cursive', color: '#F5F5F5' }}>
-              <img src={`${import.meta.env.BASE_URL}logo.png`}  alt="Logo" className="h-6" />
+              <img src={logo} alt="Logo" className="h-6" />
             </span>
           </Link>
 
