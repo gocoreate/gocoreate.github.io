@@ -1,8 +1,8 @@
+import image_74c06358160543d328f658a4026da56d9a16bfb1 from 'figma:asset/74c06358160543d328f658a4026da56d9a16bfb1.png'
 import { Link } from 'react-router';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import logo from "../../assets/logo.png";
-
+import logoImage from 'figma:asset/9fe35c91ad6e1b0e72b516eb2092fba04e984f44.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +14,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-2xl" style={{ fontFamily: 'Comfortaa, cursive', color: '#F5F5F5' }}>
-              <img src={logo} alt="Logo" className="h-6" />
+              <img src={image_74c06358160543d328f658a4026da56d9a16bfb1} alt="CoReate Logo" className="h-6" />
             </span>
           </Link>
 

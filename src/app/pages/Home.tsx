@@ -3,6 +3,7 @@ import {
   TrendingUp,
   Users,
   Target,
+  Lightbulb,
   BarChart,
   Award,
   Heart,
@@ -11,7 +12,17 @@ import {
   MapPin,
   Send,
 } from "lucide-react";
+import { Hero } from "../components/Hero";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import exampleImage from "figma:asset/78e7ee9cf2ab878098ff1b6640a5da91a339d5de.png";
+import teamImage from "figma:asset/df53a52f3805ccd529674023271b613ee9043cea.png";
+import pastInvolvementsLogos from "figma:asset/453fbdb6179f062d6d882686dd8d5c0c5a9a66be.png";
+import coreValuesDecoration from "figma:asset/6fedcd8ff03885cdac486ac38e0ef754385c2d5a.png";
+import userResearchImage from "figma:asset/381ac83bb56f849b6b919e19a11f232277117f5e.png";
+import communityOutreachImage from "figma:asset/69d523e6f40e6003a179a83c038b50f9e09cb931.png";
+import changeManagementImage from "figma:asset/a887f9a7ff2962f1d044750083ab02e55b427aed.png";
+import digitalTransformationImage from "figma:asset/d1a7de85bb3b3b5c1ea7765da78a2c2fccccab82.png";
+import { projectId, publicAnonKey } from "../../../utils/supabase/info";
 
 const team = [
   {
@@ -74,13 +85,32 @@ export function Home() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-cd73031e/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${publicAnonKey}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      setSubmitted(true);
       setFormData({
         name: "",
         email: "",
@@ -89,7 +119,17 @@ export function Home() {
         service: "",
         message: "",
       });
-    }, 3000);
+      
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -106,24 +146,9 @@ export function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section
-        className="relative h-[600px] flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: "#F5F5F5" }}
-      >
-        <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
-          <h1
-            className="mb-6 font-bold text-[36px]"
-            style={{
-              fontFamily: "Merriweather, serif",
-              lineHeight: "1.1",
-              color: "#1C2541",
-            }}
-          >
-            We Create Human-Centered Solutions that Empower
-            Organizations and Communities.
-          </h1>
-        </div>
-      </section>
+      <div className="[&>section]:!bg-[#F9FAFB]">
+        <Hero />
+      </div>
 
       {/* About Section */}
       <section id="about" className="py-20 scroll-mt-16">
@@ -134,7 +159,7 @@ export function Home() {
                 Our Methodology
               </h2>
               <div className="space-y-4 text-gray-600 text-lg">
-                <p className="text-[16px] text-[#1C2541]">
+                <p className="text-[16px] text-[#1C2541] text-left">
                   Our human-centered problem-solving approach is
                   an iterative cycle consisting of four phases:
                   research, design, testing, and development,
@@ -147,49 +172,75 @@ export function Home() {
                 </p>
               </div>
             </div>
+            <div className="flex justify-center lg:justify-end">
+              <img
+                src={exampleImage}
+                alt="Our Methodology Process Diagram"
+                className="w-full max-w-md h-auto mx-[0px] my-[20px] transition-transform duration-500 hover:scale-105"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
       <section
-        className="py-20"
-        style={{ backgroundColor: "#f5f5f5" }}
+        className="px-[0px] py-[80px]"
+        style={{ backgroundColor: "#F9FAFB" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-[34px] font-bold text-[#1C2541] mb-4">
-              Our Team
-            </h2>
-            <p className="max-w-2xl mx-auto text-left text-[16px] text-[#1c2541]">
-              Our team is joined by compassionate collaborators
-              and problem-solvers with a deep passion for
-              building effective products and services that
-              improve people's lives. Ranging from designers and
-              researchers to analysts and consultants, we
-              utilize our extensive domain expertise across User
-              Experience (UX) research, design, business, and
-              information systems to turn innovative concepts
-              into real-world solutions that generate meaningful
-              impact.{" "}
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column: Image */}
+            <div className="flex justify-center lg:justify-start pl-[0px] pr-[49px] py-[0px]">
+              <img
+                src={teamImage}
+                alt="Our Team Collaboration"
+                className="w-full max-w-lg h-auto object-contain mx-[0px] my-[40px] transition-transform duration-500 hover:scale-105"
+              />
+            </div>
+            
+            {/* Right Column: Text */}
+            <div>
+              <h2 className="text-[34px] font-bold text-[#1C2541] mb-6">
+                Our Team
+              </h2>
+              <p className="text-[16px] text-[#1c2541] leading-relaxed">
+                Our team is joined by compassionate collaborators
+                and problem-solvers with a deep passion for
+                building effective products and services that
+                improve people's lives. Ranging from designers and
+                researchers to analysts and consultants, we
+                utilize our extensive domain expertise across User
+                Experience (UX) research, design, business, and
+                information systems to turn innovative concepts
+                into real-world solutions that generate meaningful
+                impact.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section className="py-20">
+      <section className="px-[0px] pt-[80px] pb-[40px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-[34px] font-bold text-[#1C2541] mb-4">
               Past Involvements
             </h2>
-            <p className="text-[16px] text-[#1C2541] max-w-2xl mx-auto">
+            <p className="text-[16px] text-[#1C2541] max-w-2xl mx-auto mb-10">
               We have collaborated with great organizations
               across many industries, to launch products and
               services that have made a real difference in our
               communities.{" "}
             </p>
+            <div className="flex justify-center w-full">
+              <img 
+                src={pastInvolvementsLogos} 
+                alt="Partner organizations including Bloodworks Northwest, Greater Seattle Chinese Chamber of Commerce, University of Washington, and City of Seattle" 
+                className="max-w-4xl w-full h-auto object-contain px-[80px] mx-[120px] mt-[20px] mb-[0px] transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -210,15 +261,24 @@ export function Home() {
         style={{ backgroundColor: "#1C2541" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-[34px] font-bold text-[#F5F5F5] mb-4">
-              Core Values
-            </h2>
-            <p className="text-[16px] text-[#F5F5F5] max-w-2xl mx-auto">
-              We embrace the following core values when
-              developing impactful solutions to support
-              organizations and communities:
-            </p>
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-16">
+            <div className="text-left lg:max-w-2xl">
+              <h2 className="text-[34px] font-bold text-[#F5F5F5] mb-4">
+                Core Values
+              </h2>
+              <p className="text-[16px] text-[#F5F5F5]">
+                We embrace the following core values when
+                developing impactful solutions to support
+                organizations and communities:
+              </p>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <img 
+                src={coreValuesDecoration} 
+                alt="" 
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -280,7 +340,7 @@ export function Home() {
 
             <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
               <div className="w-12 h-12 bg-[#e8eaf0] rounded-lg flex items-center justify-center mb-4">
-                <Target className="text-[#1C2541]" size={24} />
+                <Lightbulb className="text-[#1C2541]" size={24} />
               </div>
               <h3 className="text-xl mb-3 text-[#1C2541]">
                 Innovative
@@ -300,7 +360,7 @@ export function Home() {
       </section>
 
       {/* Work with Us Section */}
-      <section id="work-with-us" className="py-20 scroll-mt-16">
+      <section id="work-with-us" className="scroll-mt-16 px-[0px] pt-[80px] pb-[40px]" style={{ backgroundColor: "#F9FAFB" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-[34px] font-bold text-[#1C2541] mb-6">
@@ -321,7 +381,7 @@ export function Home() {
               return (
                 <div
                   key={index}
-                  className="bg-white p-8 rounded-lg shadow-md text-center"
+                  className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-center hover:scale-[1.02]"
                 >
                   <h3 className="text-xl mb-3">
                     {index === 0 && "User Research, Design, & Development"}
@@ -335,6 +395,42 @@ export function Home() {
                     {index === 2 && "We help organizations and communities navigate change seamlessly to ensure systems and processes become more human-centered, efficient and effective over time."}
                     {index === 3 && "Our digital transformation experts thrive in the rapidly evolving digital landscape, empowering organizations to discover new possibilities and leverage the latest technologies."}
                   </p>
+                  {index === 0 && (
+                    <div className="mt-6 flex justify-center">
+                      <img
+                        src={userResearchImage}
+                        alt="User Research Team collaborating on a kanban board"
+                        className="max-w-full h-auto rounded-md px-[40px]"
+                      />
+                    </div>
+                  )}
+                  {index === 1 && (
+                    <div className="mt-6 flex justify-center">
+                      <img
+                        src={communityOutreachImage}
+                        alt="Community-Centric Outreach & Education"
+                        className="max-w-full h-auto rounded-md px-[40px]"
+                      />
+                    </div>
+                  )}
+                  {index === 2 && (
+                    <div className="mt-6 flex justify-center">
+                      <img
+                        src={changeManagementImage}
+                        alt="End-to-End Change Management"
+                        className="max-w-full h-auto rounded-md px-[40px]"
+                      />
+                    </div>
+                  )}
+                  {index === 3 && (
+                    <div className="mt-6 flex justify-center">
+                      <img
+                        src={digitalTransformationImage}
+                        alt="Digital Transformation"
+                        className="max-w-full h-auto rounded-md px-[40px]"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -466,7 +562,7 @@ export function Home() {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1C2541] focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1C2541] focus:border-transparent outline-none appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231C2541%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem] bg-[position:calc(100%-0.75rem)_center] bg-no-repeat pr-12"
                     >
                       <option value="">
                         Select a service...
@@ -495,6 +591,9 @@ export function Home() {
                       <option value="digital">
                         Digital Transformation
                       </option>
+                      <option value="ux-ui">
+                        UX/UI Design
+                      </option>
                     </select>
                   </div>
 
@@ -516,13 +615,21 @@ export function Home() {
                     />
                   </div>
 
+                  {submitError && (
+                    <div className="text-red-600 text-center mb-4 bg-red-50 p-3 rounded-lg border border-red-200">
+                      {submitError}
+                    </div>
+                  )}
                   <div className="flex justify-center">
                     <button
                       type="submit"
-                      className="bg-[#1C2541] text-white px-8 py-3 rounded-lg hover:bg-[#141b31] transition-colors flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                      className={`bg-[#1C2541] text-white px-8 py-3 rounded-lg hover:bg-[#141b31] transition-colors flex items-center justify-center gap-2 ${
+                        isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+                      }`}
                     >
-                      Send Message
-                      <Send size={20} />
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {!isSubmitting && <Send size={20} />}
                     </button>
                   </div>
                 </form>
