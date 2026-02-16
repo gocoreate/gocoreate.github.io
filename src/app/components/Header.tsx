@@ -29,9 +29,6 @@ export function Header() {
             <a href="#work-with-us" className="hover:text-gray-300 transition-colors" style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}>
               Work with Us
             </a>
-            <a href="#contact" className="hover:text-gray-300 transition-colors" style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}>
-              Contact Us
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,14 +67,6 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Work with Us
-            </a>
-            <a
-              href="#contact"
-              className="block px-3 py-2 hover:bg-[#2a3a5f] rounded-md"
-              style={{ color: '#F5F5F5', fontSize: '0.9rem', fontWeight: 'bold' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact Us
             </a>
           </div>
         )}
