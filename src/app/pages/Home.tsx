@@ -256,7 +256,7 @@ export function Home() {
 
       {/* Services Section */}
       <section
-        id="services"
+        id="core-values"
         className="py-20 scroll-mt-16"
         style={{ backgroundColor: "#1C2541" }}
       >
@@ -360,7 +360,7 @@ export function Home() {
       </section>
 
       {/* Work with Us Section */}
-      <section id="work-with-us" className="scroll-mt-16 px-[0px] pt-[80px] pb-[40px]" style={{ backgroundColor: "#F9FAFB" }}>
+      <section id="services" className="scroll-mt-16 px-[0px] pt-[80px] pb-[40px]" style={{ backgroundColor: "#F9FAFB" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-[34px] font-bold text-[#1C2541] mb-6">
@@ -442,7 +442,7 @@ export function Home() {
 
       {/* Contact Section */}
       <section
-        id="contact"
+        id="work-with-us"
         className="py-20 bg-gray-50 scroll-mt-16"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
