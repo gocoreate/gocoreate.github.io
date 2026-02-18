@@ -15,17 +15,6 @@ export function Footer() {
           </div>
           
           <div className="text-left">
-            <h3 className="text-white text-lg mb-4">Contact Info</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
-                <Mail size={16} />
-                <a href="mailto:info@gocoreate.com" className="hover:text-white transition-colors">
-                  <span>info@gocoreate.com</span>
-                </a>
-              </li>
-              
-              
-            </ul>
           </div>
 
           <div className="text-left">
@@ -37,14 +26,14 @@ export function Footer() {
               <a href="https://www.linkedin.com/company/coreate" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                 <Linkedin size={24} />
               </a>
-              <a href="https://www.instagram.com/gocoreate/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+              <a href="https://www.instagram.com/gocoreate/" target="__blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                 <Instagram size={24} />
               </a>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-left">
           <p>&copy; {new Date().getFullYear()} CoReate. All rights reserved.</p>
         </div>
       </div>
