@@ -21,7 +21,7 @@ export function Hero() {
             </p>
             <div className="flex gap-4">
               <a 
-                href="#contact" 
+                href="#work-with-us" 
                 className="bg-[#1C2541] text-white px-8 py-3 rounded-lg hover:bg-[#141b31] transition-colors inline-flex items-center gap-2 font-medium"
               >
                 Get Started

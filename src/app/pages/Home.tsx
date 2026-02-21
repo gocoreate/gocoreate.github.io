@@ -379,6 +379,7 @@ export function Home() {
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
+                index > 1 ? null : (
                 <div
                   key={index}
                   className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-center hover:scale-[1.02]"
@@ -386,14 +387,10 @@ export function Home() {
                   <h3 className="text-xl mb-3">
                     {index === 0 && "User Research, Design, & Development"}
                     {index === 1 && "Community-Centric Outreach & Education"}
-                    {index === 2 && "End-to-End Change Management"}
-                    {index === 3 && "Digital Transformation"}
                   </h3>
                   <p className="text-[16px] text-[#1C2541]">
                     {index === 0 && "With a holistic and iterative approach, we discover critical problems and challenges faced by people, and strategize user-centered solutions to support organizations and communities."}
                     {index === 1 && "We love building real connections with local communities. Our team plans and delivers quality outreach and educational programs tailored to diverse communities groups."}
-                    {index === 2 && "We help organizations and communities navigate change seamlessly to ensure systems and processes become more human-centered, efficient and effective over time."}
-                    {index === 3 && "Our digital transformation experts thrive in the rapidly evolving digital landscape, empowering organizations to discover new possibilities and leverage the latest technologies."}
                   </p>
                   {index === 0 && (
                     <div className="mt-6 flex justify-center">
@@ -413,25 +410,8 @@ export function Home() {
                       />
                     </div>
                   )}
-                  {index === 2 && (
-                    <div className="mt-6 flex justify-center">
-                      <img
-                        src={changeManagementImage}
-                        alt="End-to-End Change Management"
-                        className="max-w-full h-auto rounded-md px-[40px]"
-                      />
-                    </div>
-                  )}
-                  {index === 3 && (
-                    <div className="mt-6 flex justify-center">
-                      <img
-                        src={digitalTransformationImage}
-                        alt="Digital Transformation"
-                        className="max-w-full h-auto rounded-md px-[40px]"
-                      />
-                    </div>
-                  )}
                 </div>
+              )
               );
             })}
           </div>
