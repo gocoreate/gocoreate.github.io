@@ -1,9 +1,8 @@
-YAML
 name: Deploy Figma Make Site to Pages
 
 on:
   push:
-    branches: ['main'] # Change to 'master' if your main branch uses that name
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -11,7 +10,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -28,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci || npm install
@@ -39,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Use './build' if your framework builds to a build folder
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
         id: deployment
