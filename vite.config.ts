@@ -17,7 +17,11 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
+  export default defineConfig({
+  base: '/gocoreate.github.io/', // Replace with your exact GitHub repo name
+
   plugins: [
+    react()
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
